@@ -5,8 +5,6 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { CreateStaffDto } from '../base/dto/create-staff.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { StaffMember } from '../base/entities/staff-member';
 import {
   EMPLOYEE_MAX_SALARY_INCREASE,
@@ -23,8 +21,6 @@ import { StaffService } from '../base/staff.service';
 @Injectable()
 export class ManagerService {
   constructor(
-    @InjectRepository(StaffMember)
-    private repository: Repository<StaffMember>,
     @Inject(forwardRef(() => StaffService))
     private staffService: StaffService,
   ) {}
@@ -48,7 +44,7 @@ export class ManagerService {
     const manager = await this.findOne(managerId);
     const subordinate = await this.findOne(subordinateId);
     manager.subordinates.push(subordinate);
-    return await this.repository.save(manager);
+    return await this.staffService.updateStaff(manager);
   }
 
   async calculateSalary(id: number, date: Date): Promise<number> {
@@ -108,9 +104,5 @@ export class ManagerService {
 
   async findOne(id: number): Promise<StaffMember> {
     return this.staffService.findOne(id);
-  }
-
-  async remove(id: number) {
-    await this.repository.delete(id);
   }
 }

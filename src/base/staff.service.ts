@@ -20,6 +20,10 @@ export class StaffService {
     return await this.staffRepo.save(staffDto);
   }
 
+  async updateStaff(updatedStaff: StaffMember): Promise<StaffMember> {
+    return await this.staffRepo.save(updatedStaff);
+  }
+
   async findOne(id: number): Promise<StaffMember> {
     const res = await this.staffRepo.findOne({
       where: { id },

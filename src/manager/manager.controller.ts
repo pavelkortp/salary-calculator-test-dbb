@@ -11,6 +11,7 @@ import {
 import { ManagerService } from './manager.service';
 import { CreateStaffDto } from '../base/dto/create-staff.dto';
 import { GetSalaryDto } from '../base/dto/get-salary.dto';
+import { StaffMember } from '../base/entities/staff-member';
 
 @Controller('managers')
 export class ManagerController {
@@ -42,7 +43,7 @@ export class ManagerController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<StaffMember> {
     return this.managerService.findOne(+id);
   }
 }
