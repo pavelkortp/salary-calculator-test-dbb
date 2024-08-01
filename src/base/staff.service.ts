@@ -4,9 +4,12 @@ import { StaffMember } from './entities/staff-member';
 import { Repository } from 'typeorm';
 import { CreateStaffDto } from './dto/create-staff.dto';
 import { StaffTypes } from './constants';
+import { SalaryCalculator } from '../interfaces/salary.calculator';
 
 @Injectable()
 export class StaffService {
+  private relations = ['subordinates'];
+
   constructor(
     @InjectRepository(StaffMember)
     private staffRepo: Repository<StaffMember>,
@@ -27,7 +30,7 @@ export class StaffService {
   async findOne(id: number): Promise<StaffMember> {
     const res = await this.staffRepo.findOne({
       where: { id },
-      relations: ['subordinates'],
+      relations: this.relations,
     });
     if (!res) {
       throw new NotFoundException(`Staff with id ${id} not found`);
@@ -35,17 +38,14 @@ export class StaffService {
     return res;
   }
 
-  calculateYearsBonus(
-    workedYears: number,
-    baseSalary: number,
-    maxIncrease: number,
-    yearIncrease: number,
-  ): number {
-    const maxSalaryForWorkedYears = baseSalary * (1 + maxIncrease);
-    let increased = baseSalary;
-    for (let i = 1; i <= workedYears; i++) {
-      increased += baseSalary * yearIncrease;
-    }
-    return Math.min(maxSalaryForWorkedYears, increased);
+  async getTotalSalary(date: Date): Promise<number> {
+    const staffMembers: StaffMember[] = await this.staffRepo.find({
+      relations: this.relations,
+    });
+
+    return staffMembers.reduce(
+      (sum, sm) => sum + SalaryCalculator.calculateSalary(sm, date),
+      0,
+    );
   }
 }
