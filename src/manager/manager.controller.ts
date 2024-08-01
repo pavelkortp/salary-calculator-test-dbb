@@ -6,7 +6,6 @@ import {
   Param,
   ValidationPipe,
   ParseIntPipe,
-  DefaultValuePipe,
 } from '@nestjs/common';
 import { ManagerService } from './manager.service';
 import { CreateStaffDto } from '../base/dto/create-staff.dto';
@@ -23,14 +22,18 @@ export class ManagerController {
   }
 
   @Post(':managerId/subordinate')
-  addSubordinate(@Param('managerId', ParseIntPipe) managerId: number) {
-    return this.managerService.addSubordinate(managerId, 2);
+  addSubordinate(
+    @Param('managerId', ParseIntPipe) managerId: number,
+    @Body('subordinateId', ParseIntPipe)
+    { subordinateId }: { subordinateId: number },
+  ) {
+    return this.managerService.addSubordinate(managerId, subordinateId);
   }
 
   @Get(':id/salary')
   async calculateSalary(
     @Param('id', ParseIntPipe) id: number,
-    @Body(ValidationPipe, new DefaultValuePipe(new Date(Date.now())))
+    @Body(ValidationPipe)
     { date }: GetSalaryDto,
   ): Promise<{ salary: number }> {
     const salary = await this.managerService.calculateSalary(
