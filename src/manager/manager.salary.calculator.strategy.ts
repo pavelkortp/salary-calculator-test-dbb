@@ -1,4 +1,4 @@
-import { SalaryCalculatorStrategy } from '../interfaces/salary.calculator.strategy';
+import { SalaryCalculatorStrategy } from '../base/salary.calculator.strategy';
 import { StaffMember } from '../base/entities/staff-member';
 import {
   MANAGER_SUBORDINATES_SALARY_INCREASE,

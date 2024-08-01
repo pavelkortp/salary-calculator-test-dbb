@@ -1,4 +1,4 @@
-import { SalaryCalculatorStrategy } from './salary.calculator.strategy';
+import { SalaryCalculatorStrategy } from '../base/salary.calculator.strategy';
 import { StaffMember } from '../base/entities/staff-member';
 import { StaffTypes } from '../base/constants';
 import { EmployeeSalaryCalculatorStrategy } from '../employee/employee.salary.calculator.strategy';

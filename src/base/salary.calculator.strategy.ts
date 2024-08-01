@@ -1,4 +1,4 @@
-import { StaffMember } from '../base/entities/staff-member';
+import { StaffMember } from './entities/staff-member';
 
 export abstract class SalaryCalculatorStrategy {
   /**
