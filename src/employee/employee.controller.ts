@@ -12,6 +12,7 @@ import {
 import { EmployeeService } from './employee.service';
 import { CreateStaffDto } from '../base/dto/create-staff.dto';
 import { GetSalaryDto } from '../base/dto/get-salary.dto';
+import { StaffMember } from '../base/entities/staff-member';
 
 @Controller('employees')
 export class EmployeeController {
@@ -27,23 +28,18 @@ export class EmployeeController {
     @Param('id', ParseIntPipe) id: number,
     @Body(ValidationPipe, new DefaultValuePipe(new Date(Date.now())))
     { date }: GetSalaryDto,
-  ): Promise<{ employeeSalary: number }> {
-    const employeeSalary = await this.employeeService.calculateSalary(
+  ): Promise<{ salary: number }> {
+    const salary = await this.employeeService.calculateSalary(
       id,
       new Date(date),
     );
     return {
-      employeeSalary,
+      salary,
     };
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<StaffMember> {
     return await this.employeeService.findOne(id);
-  }
-
-  @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
-    return await this.employeeService.remove(id);
   }
 }
