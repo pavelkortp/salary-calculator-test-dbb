@@ -24,9 +24,8 @@ export class ManagerController {
   @Post(':managerId/subordinate')
   addSubordinate(
     @Param('managerId', ParseIntPipe) managerId: number,
-    @Body('subordinateId', ParseIntPipe)
-    { subordinateId }: { subordinateId: number },
-  ) {
+    @Body('subordinateId', ParseIntPipe) subordinateId: number,
+  ): Promise<StaffMember> {
     return this.managerService.addSubordinate(managerId, subordinateId);
   }
 

@@ -1,4 +1,4 @@
-import { SalaryCalculatorStrategy } from '../base/salary.calculator.strategy';
+import { SalaryCalculatorStrategy } from '../interfaces/salary.calculator.strategy';
 import { StaffMember } from '../base/entities/staff-member';
 import {
   EMPLOYEE_MAX_SALARY_INCREASE,

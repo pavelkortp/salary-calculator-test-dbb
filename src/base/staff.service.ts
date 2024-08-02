@@ -4,7 +4,7 @@ import { StaffMember } from './entities/staff-member';
 import { Repository } from 'typeorm';
 import { CreateStaffDto } from './dto/create-staff.dto';
 import { StaffTypes } from './constants';
-import { SalaryCalculator } from '../interfaces/salary.calculator';
+import { SalaryCalculator } from './salary.calculator';
 
 @Injectable()
 export class StaffService {

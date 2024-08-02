@@ -8,7 +8,7 @@ import { CreateStaffDto } from '../base/dto/create-staff.dto';
 import { StaffMember } from '../base/entities/staff-member';
 import { StaffTypes } from '../base/constants';
 import { StaffService } from '../base/staff.service';
-import { SalaryCalculator } from '../interfaces/salary.calculator';
+import { SalaryCalculator } from '../base/salary.calculator';
 
 @Injectable()
 export class SalesService {

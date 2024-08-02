@@ -1,6 +1,6 @@
-import { SalaryCalculatorStrategy } from '../base/salary.calculator.strategy';
-import { StaffMember } from '../base/entities/staff-member';
-import { StaffTypes } from '../base/constants';
+import { SalaryCalculatorStrategy } from '../interfaces/salary.calculator.strategy';
+import { StaffMember } from './entities/staff-member';
+import { StaffTypes } from './constants';
 import { EmployeeSalaryCalculatorStrategy } from '../employee/employee.salary.calculator.strategy';
 import { ManagerSalaryCalculatorStrategy } from '../manager/manager.salary.calculator.strategy';
 import { SalesSalaryCalculatorStrategy } from '../sales/sales.salary.calculator.strategy';

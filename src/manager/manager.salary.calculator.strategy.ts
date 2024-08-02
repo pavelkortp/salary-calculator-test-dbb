@@ -1,11 +1,11 @@
-import { SalaryCalculatorStrategy } from '../base/salary.calculator.strategy';
+import { SalaryCalculatorStrategy } from '../interfaces/salary.calculator.strategy';
 import { StaffMember } from '../base/entities/staff-member';
 import {
   MANAGER_MAX_SALARY_INCREASE,
   MANAGER_SUBORDINATES_SALARY_INCREASE,
   MANAGER_YEAR_SALARY_INCREASE,
 } from '../base/constants';
-import { SalaryCalculator } from '../interfaces/salary.calculator';
+import { SalaryCalculator } from '../base/salary.calculator';
 
 export class ManagerSalaryCalculatorStrategy extends SalaryCalculatorStrategy {
   static calculateSalary(sm: StaffMember, date: Date): number {
