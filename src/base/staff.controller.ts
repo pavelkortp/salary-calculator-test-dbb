@@ -6,7 +6,7 @@ import { GetSalaryDto } from './dto/get-salary.dto';
 export class StaffController {
   constructor(private service: StaffService) {}
 
-  @Get('totalSalary')
+  @Get('staff/salary')
   async getTotalSalary(
     @Body(ValidationPipe) { date }: GetSalaryDto,
   ): Promise<{ totalSalary: number }> {
