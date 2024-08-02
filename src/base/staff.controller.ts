@@ -2,11 +2,11 @@ import { Body, Controller, Get, ValidationPipe } from '@nestjs/common';
 import { StaffService } from './staff.service';
 import { GetSalaryDto } from './dto/get-salary.dto';
 
-@Controller('staff')
+@Controller()
 export class StaffController {
   constructor(private service: StaffService) {}
 
-  @Get('salary')
+  @Get('staff/salary')
   async getTotalSalary(
     @Body(ValidationPipe) { date }: GetSalaryDto,
   ): Promise<{ totalSalary: number }> {
