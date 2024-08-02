@@ -7,7 +7,7 @@ import {
 } from '../base/constants';
 import { SalaryCalculator } from '../base/salary.calculator';
 
-export class ManagerSalaryCalculatorStrategy extends SalaryCalculatorStrategy {
+export class ManagerSalaryCalculatorStrategy implements SalaryCalculatorStrategy {
   static calculateSalary(sm: StaffMember, date: Date): number {
     const years = date.getFullYear() - sm.joinDate.getFullYear();
     const baseSalaryIncrease = Math.min(
