@@ -37,7 +37,7 @@ export class SalesSalaryCalculatorStrategy implements SalaryCalculatorStrategy {
 
     while (queue.length > 0) {
       const current = queue.shift();
-      totalSalary += SalaryCalculator.calculateSalary(sm, date);
+      totalSalary += SalaryCalculator.calculateSalary(current, date);
       queue.push(...current.subordinates);
     }
 
