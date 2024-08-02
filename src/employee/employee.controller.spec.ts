@@ -1,5 +1,4 @@
 import { EmployeeController } from './employee.controller';
-import { Repository } from 'typeorm';
 import { StaffMember } from '../base/entities/staff-member';
 import { Test, TestingModule } from '@nestjs/testing';
 import { EmployeeService } from './employee.service';
