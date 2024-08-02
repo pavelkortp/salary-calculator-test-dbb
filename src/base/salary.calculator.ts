@@ -14,6 +14,8 @@ export class SalaryCalculator extends SalaryCalculatorStrategy {
         return ManagerSalaryCalculatorStrategy.calculateSalary(sm, date);
       case StaffTypes.SALES:
         return SalesSalaryCalculatorStrategy.calculateSalary(sm, date);
+      default:
+        return 0;
     }
   }
 }
