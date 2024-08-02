@@ -38,10 +38,14 @@ export class StaffService {
     return res;
   }
 
-  async getTotalSalary(date: Date): Promise<number> {
-    const staffMembers: StaffMember[] = await this.staffRepo.find({
+  async findAll(): Promise<StaffMember[]> {
+    return await this.staffRepo.find({
       relations: this.relations,
     });
+  }
+
+  async getTotalSalary(date: Date): Promise<number> {
+    const staffMembers: StaffMember[] = await this.findAll();
 
     return staffMembers.reduce(
       (sum, sm) => sum + SalaryCalculator.calculateSalary(sm, date),

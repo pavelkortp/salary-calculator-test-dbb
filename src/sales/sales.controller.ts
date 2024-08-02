@@ -17,16 +17,17 @@ export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
   @Post()
-  async create(@Body(ValidationPipe) createSalesDto: CreateStaffDto) {
+  async create(
+    @Body(ValidationPipe) createSalesDto: CreateStaffDto,
+  ): Promise<StaffMember> {
     return await this.salesService.create(createSalesDto);
   }
 
   @Post(':salesId/subordinate')
   addSubordinate(
     @Param('salesId', ParseIntPipe) salesId: number,
-    @Body('subordinateId', ParseIntPipe)
-    { subordinateId }: { subordinateId: number },
-  ) {
+    @Body('subordinateId', ParseIntPipe) subordinateId: number,
+  ): Promise<StaffMember> {
     return this.salesService.addSubordinate(salesId, subordinateId);
   }
 
