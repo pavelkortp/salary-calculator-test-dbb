@@ -1,48 +1,52 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API Endpoints
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+| Staff Type | Method | URI                                | Body                                                                               | Response                                                                                                                                                                                                                                                                                       |
+|------------|--------|------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Employee   | `POST` | `/employees`                       | ```json { "name": "John Doe", "joinDate": "2020-01-01", "baseSalary": 1000 } ```   | The created `Employee` object    ```json { "id":1, "name": "John Doe", "joinDate": "2020-01-01", "baseSalary": 1000, "position": "employee" } ```                                                                                                                                              |
+| Employee   | `GET`  | `/employees/:id`                   | None                                                                               | The `Employee` object    ```json { "id":1, "name": "John Doe", "joinDate": "2020-01-01", "baseSalary": 1000, "position": "employee" } ```                                                                                                                                                      |
+| Employee   | `GET`  | `/employees/:id/salary`            | ```json {"date": "2024-01-01"}```                                                  | ```json { "salary":1120 } ```                                                                                                                                                                                                                                                                  |
+| Manager    | `POST` | `/managers`                        | ```json { "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000 } ``` | The created `Manager` object     ```json { "id":2, "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000, "position": "manager" } ```                                                                                                                                             |
+| Manager    | `GET`  | `/managers/:id`                    | None                                                                               | The `Manager` object  ```json { "id":2, "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000, "position": "manager" } ```                                                                                                                                                        |
+| Manager    | `POST` | `/managers/:managerId/subordinate` | ```json { "subordinateId": 1 } ```                                                 | The updated `Manager` object with the new subordinate ```json { "id":2, "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000, "position": "manager", "subordinates":[{ "id":1, "name": "John Doe", "joinDate": "2020-01-01", "baseSalary": 1000, "position": "employee" }] } ``` |
+| Manager    | `GET`  | `/managers/:id/salary`             | ```json { "date": "2024-01-01" } ```                                               | ```json { "salary": 1125,6 } ```                                                                                                                                                                                                                                                               |
+| Sales      | `POST` | `/sales`                           | ```json { "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000 } ``` | The created `Sales` object     ```json { "id":3, "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000, "position": "sales" } ```                                                                                                                                                 |
+| Sales      | `GET`  | `/sales/:id`                       | None                                                                               | The `Sales` object  ```json { "id":2, "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000, "position": "sales" } ```                                                                                                                                                            |
+| Sales      | `POST` | `/sales/:salesId/subordinate`      | ```json { "subordinateId": 1 } ```                                                 | The updated `Sales` object with the new subordinate ```json { "id":2, "name": "Jane Smith", "joinDate": "2018-01-01", "baseSalary": 1000, "position": "sales", "subordinates":[{ "id":1, "name": "John Doe", "joinDate": "2020-01-01", "baseSalary": 1000, "position": "employee" }] } ```     |
+| Sales      | `GET`  | `/sales/:id/salary`                | ```json { "date": "2024-01-01" } ```                                               | ```json { "salary": 1125,6 } ```                                                                                                                                                                                                                                                               |
+| None       | `GET`  | `/staff/salary`                    | ```json { "date": "2024-01-01" } ```                                               | ```json { "totalSalary": 1125,6 } ```                                                                                                                                                                                                                                                          |
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Schemas
+### StaffMember
+- `id`: Primary key auto-generated unique ID for each staff member.
+- `name`: Name of the staff member.
+- `joinDate`: Date of starting work in the company.
+- `position`: Staff position: employee, manager or sales.
+- `subordinates`: Many-to-many relationship with StaffMember (Staff members with `position` 'manager' or 'sales' can have subordinates).
 
-## Description
+# How to run?
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Before setting up the project, ensure you have the following installed on your system:
+
+- **[Node.js](https://nodejs.org/en)** (version 14.x or higher)
+- **[npm](https://www.npmjs.com/)** (Node Package Manager, which comes with Node.js)
+- **[SQLite](https://www.sqlite.org/)** (if using SQLite as the database)
 
 ## Installation
 
+**Clone the repository**:
+   ```bash
+   git clone https://github.com/pavelkortp/salary-calculator-test-dbb.git
+   cd salary-calculator-test-dbb
+```
+**Run to install dependencies**:
 ```bash
 $ npm install
 ```
 
 ## Running the app
-
 ```bash
-# development
+# App by default launch on 3000 port
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
@@ -50,24 +54,4 @@ $ npm run start:prod
 ```bash
 # unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
