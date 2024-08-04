@@ -34,9 +34,11 @@
 ## Installation
 
 **Clone the repository**:
-   ```bash
-   git clone https://github.com/pavelkortp/salary-calculator-test-dbb.git
-   cd salary-calculator-test-dbb
+```bash
+git clone https://github.com/pavelkortp/salary-calculator-test-dbb.git
+```
+```bash
+cd salary-calculator-test-dbb
 ```
 **Run to install dependencies**:
 ```bash
@@ -44,14 +46,13 @@ $ npm install
 ```
 
 ## Running the app
+#### App by default launch on 3000 port
 ```bash
-# App by default launch on 3000 port
 $ npm run start
 ```
 
 ## Test
-
+#### Unit tests
 ```bash
-# unit tests
 $ npm run test
 ```
